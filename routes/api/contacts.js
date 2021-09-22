@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
-// const contactsOperations = require('../../model')
-// const { contactSchema } = require('../../schemas')
+
 const { contactsController } = require('../../controllers')
 
 router.get('/', contactsController.getAllContacts)
