@@ -1,3 +1,6 @@
+// tecster2005
+// mongodb+srv://tecster:tecster2005@cluster0.xetew.mongodb.net/phonebook?retryWrites=true&w=majority
+
 const express = require('express')
 const logger = require('morgan')
 const cors = require('cors')
