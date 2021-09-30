@@ -9,6 +9,7 @@ mongoose
   .connect(DB_HOST, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+
   })
   .then(() => app.listen(PORT))
   .catch((error) => {
