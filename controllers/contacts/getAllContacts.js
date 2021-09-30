@@ -1,15 +1,13 @@
-const contactsOperations = require('../../model')
-// const { contactSchema } = require('../../schemas')
+
+const { Contact } = require('../../models')
 
 const getAllContacts = async (req, res, next) => {
   try {
-    const contacts = await contactsOperations.listContacts()
+    const contacts = await Contact.find({}, '_id name email phone favorite')
     res.json({
-      status: 'sucess',
+      status: 'success',
       code: 200,
-      data: {
-        result: contacts,
-      },
+      data: { contacts },
     })
   } catch (error) {
     next(error)
