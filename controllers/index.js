@@ -7,6 +7,7 @@ const createContact = require('./contacts/createContact')
 const updateContact = require('./contacts/updateContact')
 const deleteContact = require('./contacts/deleteContact')
 const updateFavorite = require('./contacts/updateFavoriteContact')
+const auth = require('./auth')
 
 module.exports = {
   getAllContacts,
@@ -15,4 +16,5 @@ module.exports = {
   updateContact,
   deleteContact,
   updateFavorite,
+  auth,
 }

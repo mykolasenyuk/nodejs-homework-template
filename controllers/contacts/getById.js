@@ -7,9 +7,11 @@ const getById = async (req, res, next) => {
     //   contactId,
     //   '_id name email phone favorite',
     // )
+    // const { _id } = req.user
+    const contact = { _id: contactId, owner: req.user._id }
     const result = await Contact.findOne(
-      { _id: contactId },
-      '_id name email phone favorite',
+      contact,
+      '_id name email phone favorite owner',
     )
     if (!result) {
       const error = new Error(`Conatct with ID=${contactId} not found`)
