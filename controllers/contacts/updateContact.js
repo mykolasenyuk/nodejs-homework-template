@@ -3,9 +3,14 @@ const { Contact } = require('../../models')
 const updateContact = async (req, res, next) => {
   try {
     const { contactId } = req.params
-    const result = await Contact.findByIdAndUpdate(contactId, req.body, {
-      new: true,
-    })
+    const contact = { contactId, owner: req.user._id }
+    const result = await Contact.findByIdAndUpdate(
+      contact.contactId,
+      req.body,
+      {
+        new: true,
+      },
+    )
     if (!result) {
       res.status(404).json({
         status: 'error',
