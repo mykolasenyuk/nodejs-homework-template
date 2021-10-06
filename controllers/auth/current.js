@@ -7,7 +7,8 @@ const current = async (req, res) => {
     const user = await User.findById(_id)
     console.log(user)
     if (user) {
-      res.json({ email: user.email, subscription: user.subscription })
+      res.status(200).json({ email: user.email, subscription: user.subscription })
+      return
     }
   } catch (error) {
     res.json(error)

@@ -23,7 +23,10 @@ const subscription = async (req, res) => {
         },
       )
       if (user) {
-        res.json({ email: user.email, subscription: user.subscription })
+        res
+          .status(200)
+          .json({ email: user.email, subscription: user.subscription })
+        return
       }
     }
     res.json({

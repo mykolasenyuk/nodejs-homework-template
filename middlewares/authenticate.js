@@ -1,6 +1,9 @@
 const jwt = require('jsonwebtoken')
-// const { Unauthorized } = require('http-errors')
+
 const { User } = require('../models')
+// const { SECRET_KEY } = process.env
+
+// console.log({ SECRET_KEY })
 
 const authenticate = async (req, res, next) => {
   // console.log(req.headers.authorization)
@@ -18,7 +21,6 @@ const authenticate = async (req, res, next) => {
   // console.log([bearer, token])
 
   if (bearer !== 'Bearer') {
-    // throw new Unauthorized()
     res.status(401).json({
       status: 'error',
       code: 401,
@@ -40,7 +42,6 @@ const authenticate = async (req, res, next) => {
         message: 'Not authorized',
       })
       return
-      //   throw new Unauthorized()
     }
     req.user = user
     next()
