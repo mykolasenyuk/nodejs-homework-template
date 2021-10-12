@@ -4,3 +4,4 @@ yarn.log
 yarn.lock
 .env
 package-lock.json
+.vscode
