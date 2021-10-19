@@ -5,7 +5,7 @@ const {
   updateFavoriteSchema,
 } = require('../../models/contacts/contacts')
 const { validation, authenticate } = require('../../middlewares')
-const contactsController = require('../../controllers')
+const { contactsController } = require('../../controllers')
 
 const contactValidation = validation(joiSchema)
 const favoriteValidation = validation(updateFavoriteSchema)

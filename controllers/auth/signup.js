@@ -1,7 +1,8 @@
 const { User } = require('../../models')
 const { Conflict } = require('http-errors')
 const gravatar = require('gravatar')
-// const bcrypt = require('bcryptjs')
+const { v4 } = require('uuid')
+const { sendEmail } = require('../../helpers')
 
 const signup = async (req, res, next) => {
   try {
@@ -13,13 +14,24 @@ const signup = async (req, res, next) => {
       throw new Conflict('Already register')
     }
     const avatarURL = gravatar.url(email)
-    // const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10))
-    // const newUser = { email, password: hashPassword, subscription }
-    // await User.create(newUser)
+    const verificationToken = v4()
 
-    const newUser = new User({ email, subscription, avatarURL })
+    const newUser = new User({
+      email,
+      subscription,
+      avatarURL,
+      verificationToken,
+    })
     newUser.setPassword(password)
     await newUser.save()
+
+    const emailMessage = {
+      to: newUser.email,
+      subject: 'Account verification',
+      html: `
+        <a href = "http://localhost:3000/users/verify/${verificationToken}" target="_blank">Verify link</a>`,
+    }
+    await sendEmail(emailMessage)
 
     res.status(201).json({
       status: 'success',
@@ -28,7 +40,7 @@ const signup = async (req, res, next) => {
       newUser,
     })
   } catch (error) {
-    res.status(409).json(error)
+    res.status(409).json(error.message)
   }
 }
 module.exports = signup
